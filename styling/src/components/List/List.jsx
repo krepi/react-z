@@ -1,27 +1,32 @@
-import { Item } from "../Item/Item.jsx";
-import styles from './List.module.css';
+import {Item} from "../Item/Item.jsx";
 import styled from "styled-components";
+import {StyledButton} from "../styles/StyledButton.jsx";
 
 const emojis = ["🚀", "🎶", "🎁", "🎉", "✨"];
 
-
-const Button=styled.button`
-
+const StyledList = styled.ul`
+  display: flex;
+  flex-direction: column;
+  list-style: none;
+  gap: 30px;
+  padding: 30px;
 `;
-
 
 export function List() {
     return (
         <>
-            <button className={styles.btn} onClick={()=> alert(`Liczba emoji: ${emojis.length}`)}
+            <StyledButton
+                $primary={true}
+                $margin={30}
+                onClick={() => alert(`Liczba emoji: ${emojis.length}`)}
             >
                 Pokaz liczbe emoji
-            </button>
-        <ul className={styles.list}>
-            {emojis.map((emoji) => (
-                <Item key={emoji} emoji={emoji} />
-            ))}
-        </ul>
+            </StyledButton>
+            <StyledList >
+                {emojis.map((emoji) => (
+                    <Item key={emoji} emoji={emoji}/>
+                ))}
+            </StyledList>
         </>
     );
 }
