@@ -1,22 +1,36 @@
 import './App.css'
+import {LikesCounter} from "./components/LikesCounter.jsx";
+import {Plot} from "./components/Plot.jsx";
+import {Form} from "./components/Form.jsx";
+import {Reviews} from "./components/Reviews.jsx";
+import {useState} from "react";
+
+const initialReviews = [
+    {author: "Brian", text: "Super Film", id: 1},
+    {author: "Jessica", text: "Slaby Film", id: 2},
+];
 
 function App() {
+    const [reviews, setReviews] = useState(initialReviews);
 
-    const buttonEl =(
-      <button onClick={()=>{alert("klik")}}>Pokaż spoiler</button>
+    return (
+        <>
+            <h1>Gwiezdne wojny V</h1>
+            <h2>Rok produkcji: 1980</h2>
+            <LikesCounter/>
+            <Plot/>
+            <Reviews reviews={reviews}/>
+            <Form onReviewSubmit={(author, text) => {
+                setReviews((prevReviews => {
+                    return [{
+                        author, text, id: prevReviews.length + 1
+                    },
+                        ...prevReviews
+                    ];
+                }));
+            }}/>
+        </>
     );
-
-  return (
-    <>
-   <h1>Gwiezdne wojny V</h1>
-        <h2>Rok produkcji: 1980</h2>
-        <h2>Fabuła</h2>
-        <p>Dobrzy walczą ze złymi. Trzeba wyłączuc pole siłowe</p>
-        {/*<button>Pokaż spoiler</button>*/}
-        {buttonEl}
-        <p>Vader okazuje sie być ojcem Luka</p>
-    </>
-  )
 }
 
-export default App
+export default App;
